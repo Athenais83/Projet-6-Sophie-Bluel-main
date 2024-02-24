@@ -61,11 +61,11 @@ function loginUser(email, password) {
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify()
   };
 
   fetch('http://localhost:5678/api/users/login', options)
-      .then(response => {
+      .then (response => {
           if (response.ok) {
               localStorage.setItem('isLoggedIn', true);
               window.location.href = '/index.html';
