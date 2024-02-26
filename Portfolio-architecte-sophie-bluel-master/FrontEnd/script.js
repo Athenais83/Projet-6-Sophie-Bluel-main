@@ -50,6 +50,14 @@ function displaycategories(){
   })
 };
 
+const buttonSubmit = document.getElementById("submit")
+buttonSubmit.addEventListener("click", function(e){
+  e.preventDefault()
+  const email = document.getElementById("email").value
+  const password = document.getElementById("password").value
+  loginUser(email, password)
+})
+
 function loginUser(email, password) {
   const data = {
       email: email,
@@ -61,24 +69,25 @@ function loginUser(email, password) {
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify()
+      body: JSON.stringify(data)
   };
 
   fetch('http://localhost:5678/api/users/login', options)
-      .then (response => {
-          if (response.ok) {
-              localStorage.setItem('isLoggedIn', true);
-              window.location.href = '/index.html';
-          } else {
-              alert('Email ou mot de passe incorrect.');
-          }
-      })
-      .catch(error => {
-          console.error('Erreur lors de la requête:', error);
-          alert('Une erreur est survenue lors de la connexion.');
-      });
-}
-const email = 'utilisateur@example.com';
-const password = 'motdepasse';
-loginUser(email, password);
+  .then(response => {
+      if (response.ok) {
+          return response.json();
+      } else {
+          throw new Error('Email ou mot de passe incorrect.');
+      }
+  })
+  .then(data => {
+      const token = data.token;
+      localStorage.setItem('token', token);
+      window.location.href = '/index.html';
+  })
+  .catch(error => {
+      console.error('Erreur lors de la requête:', error);
+      alert('Une erreur est survenue lors de la connexion.');
+  });
 
+}
