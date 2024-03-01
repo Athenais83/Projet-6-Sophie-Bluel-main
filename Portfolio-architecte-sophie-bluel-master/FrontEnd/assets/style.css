@@ -208,3 +208,10 @@ footer nav ul {
 	margin: 2em
 }
 
+.edit-mode-banner {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
