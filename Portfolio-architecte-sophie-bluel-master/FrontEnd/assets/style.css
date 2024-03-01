@@ -208,10 +208,15 @@ footer nav ul {
 	margin: 2em
 }
 
-.edit-mode-banner {
+.bandeau-edition {
     background-color: black;
     color: white;
     padding: 10px;
     margin-bottom: 10px;
+	text-align: center;
+}
+
+.btn-modifier{
+	color: black;
 }
 

@@ -50,14 +50,54 @@ function displaycategories(){
   })
 };
 
+function displayEditMode() {
+  console.log("fonction displayeditmode called.");
+  const header = document.querySelector("header");
+  
+  const editModeDiv = document.createElement("div");
+  editModeDiv.innerHTML = "Mode édition";
+  editModeDiv.classList.add("bandeau-edition")
+  
+  header.parentNode.insertBefore(editModeDiv, header);
+
+  const buttonEdit = document.createElement("button");
+  buttonEdit.innerHTML = "Modifier";
+  buttonEdit.classList.add("btn-modifier")
+  buttonFilter.innerHTML = "";
+  buttonFilter.appendChild(buttonEdit);
+
+  buttonEdit.addEventListener("click", function(e) {
+      e.preventDefault();
+      const modal = document.createElement("div");
+      modal.classList.add("modal");
+
+      modal.innerHTML = "";
+      const span = document.createElement("span");
+      span.classList.add("close");
+
+  document.body.appendChild(modal);
+  modal.style;display = "block";
+
+  const closeButton = modal.querySelector(".close");
+  closeButton.onClick = function(){
+    modal.style.display = "none";
+  }
+
+  window.onClick = function(event){
+    if(event.target == modal){
+      modal.style.display = "none";
+    }
+  }
+  });
+}
+
   const buttonSubmit = document.getElementById("submit")
   buttonSubmit.addEventListener("click", function(e){
-  e.preventDefault()
+  e.preventDefault();
   const email = document.getElementById("email").value
   const password = document.getElementById("password").value
   loginUser(email, password)
 });
-
 
 function loginUser(email, password) {
   const data = {
@@ -82,41 +122,20 @@ function loginUser(email, password) {
       }
   })
   .then(data => {
-      const token = data.token;
-      localStorage.setItem('token', token); 
-      window.location.href="/index.html"
-      displayEditMode();
+    const token = data.token;
+    localStorage.setItem('token', token); 
+    localStorage.setItem('editModeEnabled', true); // Indiquer que le mode d'édition est activé
+    window.location.href="./index.html";
 })
-
-  .catch(error => {
-      console.error('Erreur lors de la requête:', error);
-      alert('Une erreur est survenue lors de la connexion.');
-  })
-};
-
-function displayEditMode() {
-  const header = document.querySelector("header");
-  
-  // Création du div pour le mode édition
-  const editModeDiv = document.createElement("div");
-  editModeDiv.innerHTML = "Mode édition";
-  editModeDiv.style.padding = "10px";
-  editModeDiv.style.backgroundColor = "#f0f0f0";
-  editModeDiv.style.textAlign = "center";
-  
-  // Ajout du div au header
-  header.insertBefore(editModeDiv, header.firstChild);
-
-  // Remplacement des boutons de filtres par un bouton "Modifier"
-  const buttonEdit = document.createElement("button");
-  buttonEdit.innerHTML = "Modifier";
-  buttonFilter.innerHTML = ""; // Effacement des boutons de filtres existants
-  buttonFilter.appendChild(buttonEdit);
-
-  // Ajout d'un écouteur d'événement pour le bouton "Modifier"
-  buttonEdit.addEventListener("click", function() {
-      // Code pour le mode d'édition ici
-      // Par exemple, vous pouvez ajouter des fonctionnalités de modification
-      console.log("Mode édition activé");
-  });
+.catch(error => {
+    console.error('Erreur lors de la connexion :', error);
+});
 }
+
+// Vérifier si le mode d'édition est activé lors du chargement de la page
+window.onload = function() {
+const editModeEnabled = localStorage.getItem('editModeEnabled');
+if (editModeEnabled) {
+    displayEditMode(); // Afficher le mode d'édition si activé
+}
+};
