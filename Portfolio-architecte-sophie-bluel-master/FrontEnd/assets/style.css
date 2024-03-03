@@ -220,3 +220,40 @@ footer nav ul {
 	color: black;
 }
 
+.modal {
+	display: none; 
+	position: fixed; 
+	z-index: 1; 
+	left: 50px;
+	top: 50px;
+	width: 90%; 
+	height: 90%; 
+	background-color: rgba(0, 0, 0, 0.5); 
+  }
+
+  .modal-content {
+	background-color: #fefefe; 
+	margin: 5% auto; 
+	padding: 10px;
+	border: 1px solid #888;
+	width: 90%;
+	height: 90%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Ombre */
+	position: relative; 
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+  }
+  
+  .close {
+    width: 3%;
+    height: 3%;
+    background-color: black;
+    float: right;
+  }
+
+  .modal-work{
+	img{
+		width: 30%;
+	}
+  }

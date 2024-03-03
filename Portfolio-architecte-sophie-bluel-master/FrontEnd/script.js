@@ -67,23 +67,43 @@ function displayEditMode() {
   buttonFilter.appendChild(buttonEdit);
 
   buttonEdit.addEventListener("click", function(e) {
+    console.log("modale créer")
       e.preventDefault();
       const modal = document.createElement("div");
       modal.classList.add("modal");
 
-      modal.innerHTML = "";
-      const span = document.createElement("span");
-      span.classList.add("close");
+      const modalContent = document.createElement("div");
+      modalContent.classList.add("modal-content");
+      
+      works.forEach(work => {
+        const figure = document.createElement("figure");
+        figure.classList.add("modal-work");
+        const figcaption = document.createElement("figcaption");
+        figcaption.innerHTML = work.title;
+        const worksImage = document.createElement("img");
+        worksImage.src = work.imageUrl;
+        worksImage.alt = work.title;
+        figure.appendChild(worksImage);
+        figure.appendChild(figcaption);
+        modalContent.appendChild(figure);
+      });
+      
+      modal.appendChild(modalContent);
+
+    const closeButton = document.createElement("button");
+    closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    closeButton.classList.add("close");
+    modalContent.appendChild(closeButton);
 
   document.body.appendChild(modal);
-  modal.style;display = "block";
+  modal.style.display = "block";
 
-  const closeButton = modal.querySelector(".close");
-  closeButton.onClick = function(){
+  
+  closeButton.onclick = function(){
     modal.style.display = "none";
   }
 
-  window.onClick = function(event){
+  window.onclick = function(event){
     if(event.target == modal){
       modal.style.display = "none";
     }
