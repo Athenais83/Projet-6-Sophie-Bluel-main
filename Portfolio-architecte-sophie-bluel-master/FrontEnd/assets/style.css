@@ -222,38 +222,74 @@ footer nav ul {
 
 .modal {
 	display: none; 
-	position: fixed; 
+	position: absolute; 
 	z-index: 1; 
-	left: 50px;
-	top: 50px;
-	width: 90%; 
-	height: 90%; 
-	background-color: rgba(0, 0, 0, 0.5); 
+	left: 25%;
+	top: 65%;
+	width: 75%; 
+	height: 100%; 
+	background-color: transparent; 
   }
 
   .modal-content {
 	background-color: #fefefe; 
-	margin: 5% auto; 
-	padding: 10px;
 	border: 1px solid #888;
-	width: 90%;
-	height: 90%;
+	width: 70%;
+	height: 84%;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Ombre */
 	position: relative; 
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	overflow-y: auto;
   }
   
   .close {
-    width: 3%;
-    height: 3%;
-    background-color: black;
+    width: 5%;
+	height: 4%;
+    background-color: white;
     float: right;
+	border: none;
+	i{
+		color: black;
+	}
   }
 
   .modal-work{
+	width: 18%;
+	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
 	img{
-		width: 30%;
+		width: 100%;
+		height: 65%;
+		object-fit: cover;
 	}
+  }
+
+  .delete-button{
+	border: none;
+	background-color: black;
+	position: absolute;
+	margin: 4px;
+	i{
+		color: white;
+	}
+  }
+
+  .title-modal{
+	font-size: 22px;
+	width: 95%;
+	text-align: center;
+	padding-top: 10%;
+  }
+
+  .list-works{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 80%;
+	padding-left: 80px;
+	padding-right: 80px;
+	gap: 5px;
   }

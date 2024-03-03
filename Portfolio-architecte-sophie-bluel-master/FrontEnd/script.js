@@ -74,26 +74,42 @@ function displayEditMode() {
 
       const modalContent = document.createElement("div");
       modalContent.classList.add("modal-content");
+      const titleModal = document.createElement("p");
+      titleModal.classList.add("title-modal");
+      titleModal.innerHTML = "Galerie Photo";
+      modalContent.appendChild(titleModal);
+    
+      const closeButton = document.createElement("button");
+      closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+      closeButton.classList.add("close");
+      modalContent.appendChild(closeButton);
       
+      const listWorks = document.createElement("div")
+      listWorks.classList.add("list-works")
+      modalContent.appendChild(listWorks)
+
       works.forEach(work => {
         const figure = document.createElement("figure");
         figure.classList.add("modal-work");
         const figcaption = document.createElement("figcaption");
-        figcaption.innerHTML = work.title;
         const worksImage = document.createElement("img");
         worksImage.src = work.imageUrl;
-        worksImage.alt = work.title;
+        const deleteButton = document.createElement("button");
+        deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        deleteButton.classList.add("delete-button");
+        deleteButton.addEventListener("click", function() {
+          // Ajoutez votre logique de suppression ici
+          console.log("Supprimer le projet :", work.title);
+        });
         figure.appendChild(worksImage);
         figure.appendChild(figcaption);
-        modalContent.appendChild(figure);
+        figure.appendChild(deleteButton);
+        listWorks.appendChild(figure);
       });
       
       modal.appendChild(modalContent);
 
-    const closeButton = document.createElement("button");
-    closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-    closeButton.classList.add("close");
-    modalContent.appendChild(closeButton);
+   
 
   document.body.appendChild(modal);
   modal.style.display = "block";
@@ -144,7 +160,7 @@ function loginUser(email, password) {
   .then(data => {
     const token = data.token;
     localStorage.setItem('token', token); 
-    localStorage.setItem('editModeEnabled', true); // Indiquer que le mode d'édition est activé
+    localStorage.setItem('editModeEnabled', true); 
     window.location.href="./index.html";
 })
 .catch(error => {
@@ -152,10 +168,10 @@ function loginUser(email, password) {
 });
 }
 
-// Vérifier si le mode d'édition est activé lors du chargement de la page
+
 window.onload = function() {
 const editModeEnabled = localStorage.getItem('editModeEnabled');
 if (editModeEnabled) {
-    displayEditMode(); // Afficher le mode d'édition si activé
+    displayEditMode();
 }
 };
