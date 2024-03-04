@@ -63,8 +63,9 @@ function displayEditMode() {
   const buttonEdit = document.createElement("button");
   buttonEdit.innerHTML = "Modifier";
   buttonEdit.classList.add("btn-modifier")
-  buttonFilter.innerHTML = "";
-  buttonFilter.appendChild(buttonEdit);
+  buttonFilter.style.display = "";
+
+  buttonFilter.parentNode.insertBefore(buttonEdit, buttonFilter);
 
   buttonEdit.addEventListener("click", function(e) {
     console.log("modale créer")
@@ -98,7 +99,7 @@ function displayEditMode() {
         deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
         deleteButton.classList.add("delete-button");
         deleteButton.addEventListener("click", function() {
-          // Ajoutez votre logique de suppression ici
+          // Ajoutez suppression ici
           console.log("Supprimer le projet :", work.title);
         });
         figure.appendChild(worksImage);
@@ -108,8 +109,6 @@ function displayEditMode() {
       });
       
       modal.appendChild(modalContent);
-
-   
 
   document.body.appendChild(modal);
   modal.style.display = "block";
@@ -160,8 +159,9 @@ function loginUser(email, password) {
   .then(data => {
     const token = data.token;
     localStorage.setItem('token', token); 
-    localStorage.setItem('editModeEnabled', true); 
+    localStorage.getItem('editModeEnabled', true); 
     window.location.href="./index.html";
+    displayEditMode();
 })
 .catch(error => {
     console.error('Erreur lors de la connexion :', error);
