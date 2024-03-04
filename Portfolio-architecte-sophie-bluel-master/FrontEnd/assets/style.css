@@ -222,26 +222,28 @@ footer nav ul {
 
 .modal {
 	display: none; 
-	position: absolute; 
+	position: fixed; 
 	z-index: 1; 
-	left: 25%;
-	top: 65%;
-	width: 75%; 
+	left: 0;
+	top: 0%;
+	width: 100%; 
 	height: 100%; 
-	background-color: transparent; 
+	background-color: rgba(0, 0, 0, 0.5); 
   }
 
   .modal-content {
 	background-color: #fefefe; 
 	border: 1px solid #888;
-	width: 70%;
-	height: 84%;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Ombre */
+	width: 50%;
+	height: 50%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); 
 	position: relative; 
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	overflow-y: auto;
+	left: 23%;
+	top: 30%;
   }
   
   .close {

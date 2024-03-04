@@ -70,45 +70,67 @@ function displayEditMode() {
   buttonEdit.addEventListener("click", function(e) {
     console.log("modale créer")
       e.preventDefault();
-      const modal = document.createElement("div");
-      modal.classList.add("modal");
+      createModal();
+  });
+}
 
-      const modalContent = document.createElement("div");
-      modalContent.classList.add("modal-content");
-      const titleModal = document.createElement("p");
-      titleModal.classList.add("title-modal");
-      titleModal.innerHTML = "Galerie Photo";
-      modalContent.appendChild(titleModal);
+function createModal(){
+  const modal = document.querySelector(".modal");
+  modal.innerHTML="";
+
+  const modalContent = document.createElement("div");
+  modalContent.classList.add("modal-content");
+  const titleModal = document.createElement("p");
+  titleModal.classList.add("title-modal");
+  titleModal.innerHTML = "Galerie Photo";
+  modalContent.appendChild(titleModal);
+
+  const closeButton = document.createElement("button");
+  closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+  closeButton.classList.add("close");
+  modalContent.appendChild(closeButton);
+  
+  const listWorks = document.createElement("div")
+  listWorks.classList.add("list-works")
+  modalContent.appendChild(listWorks)
+
+  works.forEach(work => {
+    const figure = document.createElement("figure");
+    figure.classList.add("modal-work");
+    const figcaption = document.createElement("figcaption");
+    const worksImage = document.createElement("img");
+    worksImage.src = work.imageUrl;
+    const deleteButton = document.createElement("button");
+    deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+    deleteButton.classList.add("delete-button");
+    deleteButton.addEventListener("click", function() {
+      
+      const options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization':"Bearer "+localStorage.getItem("token")
+        }
+    };
+  
+    fetch('http://localhost:5678/api/works/'+ work.id, options)
     
-      const closeButton = document.createElement("button");
-      closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-      closeButton.classList.add("close");
-      modalContent.appendChild(closeButton);
-      
-      const listWorks = document.createElement("div")
-      listWorks.classList.add("list-works")
-      modalContent.appendChild(listWorks)
+    .then(async data => {
+      await loadWorks();
+      createModal();
+  })
+  .catch(error => {
+      console.error('Erreur lors de la connexion :', error);
+  });
+      console.log("Supprimer le projet :", work.title);
+    });
+    figure.appendChild(worksImage);
+    figure.appendChild(figcaption);
+    figure.appendChild(deleteButton);
+    listWorks.appendChild(figure);
+  });
 
-      works.forEach(work => {
-        const figure = document.createElement("figure");
-        figure.classList.add("modal-work");
-        const figcaption = document.createElement("figcaption");
-        const worksImage = document.createElement("img");
-        worksImage.src = work.imageUrl;
-        const deleteButton = document.createElement("button");
-        deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
-        deleteButton.classList.add("delete-button");
-        deleteButton.addEventListener("click", function() {
-          // Ajoutez suppression ici
-          console.log("Supprimer le projet :", work.title);
-        });
-        figure.appendChild(worksImage);
-        figure.appendChild(figcaption);
-        figure.appendChild(deleteButton);
-        listWorks.appendChild(figure);
-      });
-      
-      modal.appendChild(modalContent);
+  modal.appendChild(modalContent);
 
   document.body.appendChild(modal);
   modal.style.display = "block";
@@ -123,55 +145,16 @@ function displayEditMode() {
       modal.style.display = "none";
     }
   }
-  });
 }
-
-  const buttonSubmit = document.getElementById("submit")
-  buttonSubmit.addEventListener("click", function(e){
-  e.preventDefault();
-  const email = document.getElementById("email").value
-  const password = document.getElementById("password").value
-  loginUser(email, password)
-});
-
-function loginUser(email, password) {
-  const data = {
-      email: email,
-      password: password
-  };
-
-  const options = {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-  };
-
-  fetch('http://localhost:5678/api/users/login', options)
-  .then(response => {
-      if (response.ok) {
-          return response.json();
-      } else {
-          throw new Error('Email ou mot de passe incorrect.');
-      }
-  })
-  .then(data => {
-    const token = data.token;
-    localStorage.setItem('token', token); 
-    localStorage.getItem('editModeEnabled', true); 
-    window.location.href="./index.html";
-    displayEditMode();
-})
-.catch(error => {
-    console.error('Erreur lors de la connexion :', error);
-});
-}
-
 
 window.onload = function() {
-const editModeEnabled = localStorage.getItem('editModeEnabled');
+const editModeEnabled = localStorage.getItem('token');
 if (editModeEnabled) {
     displayEditMode();
 }
 };
+
+
+function addProject(){
+  
+}
