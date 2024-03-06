@@ -71,8 +71,10 @@ function displayEditMode() {
     console.log("modale créer")
       e.preventDefault();
       createModal();
+      addProject();
   });
 }
+
 
 function createModal(){
   const modal = document.querySelector(".modal");
@@ -154,7 +156,52 @@ if (editModeEnabled) {
 }
 };
 
-
 function addProject(){
-  
-}
+  console.log("cette fonction est appeler");
+    const buttonadd = document.createElement("div")
+    buttonadd.classList.add("div-button-add")
+    
+document.querySelector(".modal-content").appendChild(buttonadd);
+    const btnAdd = document.createElement("button")
+    btnAdd.classList.add("btn-add")
+    btnAdd.innerHTML ="Ajouter une photo"
+    buttonadd.appendChild(btnAdd)
+
+    btnAdd.addEventListener("click", function(e){
+    e.preventDefault();
+    modalProjet();
+  });
+    
+ };
+
+function modalProjet(){
+  console.log("fonction modalProjet est appeler")
+  const modalAddProjet = document.createElement("div")
+    modalAddProjet.classList.add("modal-add-projet")
+
+    const modalContentProjet = document.createElement("div")
+    modalContentProjet.classList.add("modal-content-projet")
+    const formData = new FormData();
+
+formData.append("username", "Groucho");
+formData.append("accountnum", 123456); // le numéro 123456 est converti immédiatement en chaîne "123456"
+
+// fichier HTML choisi par l'utilisateur
+formData.append("userfile", fileInputElement.files[0]);
+
+// objet JavaScript de type fichier
+const content = '<q id="a"><span id="b">hey!</span></q>'; // le corps du nouveau fichier…
+const blob = new Blob([content], { type: "text/xml" });
+
+formData.append("webmasterfile", blob);
+
+const request = new XMLHttpRequest();
+request.open("POST", "https://example.com/submitform.php");
+request.send(formData);
+
+
+
+    modalAddProjet.appendChild(modalContentProjet);
+
+
+};

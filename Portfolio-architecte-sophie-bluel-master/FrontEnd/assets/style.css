@@ -295,3 +295,44 @@ footer nav ul {
 	padding-right: 80px;
 	gap: 5px;
   }
+
+.div-button-add{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+  .btn-add{
+	background-color: #1D6154;
+	color: white;
+	border-radius: 30px;
+	font-size: 18px;
+	height: 30px;
+	padding-left: 25px;
+	padding-right: 25px;
+  }
+
+  .modal-add-projet{
+	display: none; 
+	position: fixed; 
+	z-index: 1; 
+	left: 0;
+	top: 0%;
+	width: 100%; 
+	height: 100%; 
+	background-color: rgba(0, 0, 0, 0.5); 
+  }
+
+  .modal-content-projet{
+	background-color: #fefefe; 
+	border: 1px solid #888;
+	width: 50%;
+	height: 50%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); 
+	position: relative; 
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	overflow-y: auto;
+	left: 23%;
+	top: 30%;
+  }
