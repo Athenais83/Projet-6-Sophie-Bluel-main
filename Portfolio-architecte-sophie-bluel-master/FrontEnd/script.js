@@ -87,6 +87,10 @@ function createModal(){
   titleModal.innerHTML = "Galerie Photo";
   modalContent.appendChild(titleModal);
 
+  const modalProjet = document.createElement("div");
+  modalProjet.classList.add("modal-projet");
+  modalContent.appendChild(modalProjet);
+
   const closeButton = document.createElement("button");
   closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
   closeButton.classList.add("close");
@@ -147,13 +151,6 @@ function createModal(){
       modal.style.display = "none";
     }
   }
-}
-
-window.onload = function() {
-const editModeEnabled = localStorage.getItem('token');
-if (editModeEnabled) {
-    displayEditMode();
-}
 };
 
 function addProject(){
@@ -162,6 +159,7 @@ function addProject(){
     buttonadd.classList.add("div-button-add")
     
 document.querySelector(".modal-content").appendChild(buttonadd);
+
     const btnAdd = document.createElement("button")
     btnAdd.classList.add("btn-add")
     btnAdd.innerHTML ="Ajouter une photo"
@@ -171,37 +169,72 @@ document.querySelector(".modal-content").appendChild(buttonadd);
     e.preventDefault();
     modalProjet();
   });
-    
+}
+  window.onload = function() {
+  const editModeEnabled = localStorage.getItem('token');
+  if (editModeEnabled) {
+    displayEditMode();
+} 
  };
 
-function modalProjet(){
-  console.log("fonction modalProjet est appeler")
-  const modalAddProjet = document.createElement("div")
-    modalAddProjet.classList.add("modal-add-projet")
+ function modalProjet() {
+  console.log("fonction modalProjet est appelée");
 
-    const modalContentProjet = document.createElement("div")
-    modalContentProjet.classList.add("modal-content-projet")
-    const formData = new FormData();
+  const modalContent = document.querySelector(".modal-content");
 
-formData.append("username", "Groucho");
-formData.append("accountnum", 123456); // le numéro 123456 est converti immédiatement en chaîne "123456"
+  const form = document.createElement("form");
+  form.classList.add("form-add-projet")
+  form.innerHTML = `
+    <p class="title-modal-project">Ajout photo</p>
+    <div class="photo">
+    <img src="./assets/icons/Vector.png" alt="" class="img-form">
+    <button class="ajout-photo"> + Ajouter photo
+    <input type="file" id="projectImage" name="projectImage" accept="image/*" required>
+    </button>
+    <p class="format">jpg.png : 4mo max </p>
+    </div>
+    <libelle class="libelle">Titre</libelle>
+    <input type="text" class="projectTitle" name="projectTitle" required>
+    <libelle class="libelle">Catégories</libelle>
+    <input type"select" class="selectCategories" name="Categories" required>
+    <option value="loadCategories"></option>
+    </input>
+    <button type="submit" class="btn-valider">Valider</button>
+  `;
 
-// fichier HTML choisi par l'utilisateur
-formData.append("userfile", fileInputElement.files[0]);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-// objet JavaScript de type fichier
-const content = '<q id="a"><span id="b">hey!</span></q>'; // le corps du nouveau fichier…
-const blob = new Blob([content], { type: "text/xml" });
+    const formData = new FormData(form);
+    const options = {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Authorization': "Bearer " + localStorage.getItem("token")
+      }
+    };
 
-formData.append("webmasterfile", blob);
+    fetch('http://localhost:5678/api/works', options)
+      .then(async response => {
+        if (response.ok) {
+          await loadWorks(); 
+          closeModal(); 
+        } else {
+          console.error('Erreur lors de l\'ajout du projet :', response.statusText);
+        }
+      })
+      .catch(error => {
+        console.error('Erreur lors de la connexion :', error);
+      });
+  });
 
-const request = new XMLHttpRequest();
-request.open("POST", "https://example.com/submitform.php");
-request.send(formData);
-
-
-
-    modalAddProjet.appendChild(modalContentProjet);
-
-
+  modalContent.innerHTML = '';
+  modalContent.appendChild(form);
 };
+
+function closeModal() {
+  const modal = document.querySelector(".modal");
+  modal.style.display = "none";
+};
+
+

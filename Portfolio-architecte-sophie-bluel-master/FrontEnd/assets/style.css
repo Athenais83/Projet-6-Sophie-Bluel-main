@@ -311,28 +311,74 @@ footer nav ul {
 	padding-right: 25px;
   }
 
-  .modal-add-projet{
-	display: none; 
-	position: fixed; 
-	z-index: 1; 
-	left: 0;
-	top: 0%;
-	width: 100%; 
-	height: 100%; 
-	background-color: rgba(0, 0, 0, 0.5); 
-  }
-
-  .modal-content-projet{
-	background-color: #fefefe; 
-	border: 1px solid #888;
-	width: 50%;
-	height: 50%;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); 
-	position: relative; 
+.form-add-projet{
+	align-items: center;
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	overflow-y: auto;
-	left: 23%;
-	top: 30%;
-  }
+	flex-direction: column;
+	width: 100%;
+}  
+
+.photo{
+	background-color:#E8F1F6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	width: 70%;
+}
+
+.title-modal-project{
+	font-size: 22px;
+    width: 95%;
+    text-align: center;
+    padding-top: 25px;
+	padding-bottom: 20px;
+}
+
+.img-form{
+	width: 20%;
+	padding-bottom: 15px;
+}
+
+.ajout-photo{
+	z-index: 0;
+	border-radius: 20px;
+	align-self: center;
+	font-size: 20px;
+	display: flex;
+	flex-direction: column;
+	width: 40%;
+	line-height: 10px;
+}
+
+.format{
+	text-align: center;
+}
+
+#projectImage{
+	z-index: 1;
+	opacity: 0;
+}
+
+.btn-valider{
+	width: 40%;
+	border-radius: 20px;
+	font-size: 20px;
+	background-color: #A7A7A7;
+	color: white;
+	line-height: 25px;
+}
+
+.selectCategories{
+	width: 70%;
+}
+
+.projectTitle{
+	width: 70%;
+}
+
+.libelle{
+	width: 70%;
+	padding-top: 15px;
+}
