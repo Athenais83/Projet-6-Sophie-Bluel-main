@@ -177,10 +177,13 @@ document.querySelector(".modal-content").appendChild(buttonadd);
 } 
  };
 
- function modalProjet() {
+ async function modalProjet() {
   console.log("fonction modalProjet est appelée");
 
   const modalContent = document.querySelector(".modal-content");
+
+  const response = await fetch("http://localhost:5678/api/categories");
+  const categories = await response.json();
 
   const form = document.createElement("form");
   form.classList.add("form-add-projet")
@@ -196,16 +199,32 @@ document.querySelector(".modal-content").appendChild(buttonadd);
     <libelle class="libelle">Titre</libelle>
     <input type="text" class="projectTitle" name="projectTitle" required>
     <libelle class="libelle">Catégories</libelle>
-    <input type"select" class="selectCategories" name="Categories" required>
-    <option value="loadCategories"></option>
-    </input>
+    <select class="selectCategories" name="Categories" required>
+    </select>
     <button type="submit" class="btn-valider">Valider</button>
   `;
+
+  const selectCategories = form.querySelector('.selectCategories');
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category.id;
+    option.textContent = category.name;
+    selectCategories.appendChild(option);
+  });
+
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    const title = document.querySelector('.projectTitle').value;
+    const image = document.querySelector('.img-form').imageUrl;
+    const categories = document.querySelector('.selectCategories').value;
+    
     const formData = new FormData(form);
+    formData.append('title', title);
+    formData.append('categoryId', categories);
+    formData.append('imageUrl', image);
+
     const options = {
       method: 'POST',
       body: formData,
@@ -218,9 +237,8 @@ document.querySelector(".modal-content").appendChild(buttonadd);
       .then(async response => {
         if (response.ok) {
           await loadWorks(); 
-          closeModal(); 
         } else {
-          console.error('Erreur lors de l\'ajout du projet :', response.statusText);
+          console.error("Erreur lors de l'ajout du projet", response.statusText);
         }
       })
       .catch(error => {
@@ -230,11 +248,6 @@ document.querySelector(".modal-content").appendChild(buttonadd);
 
   modalContent.innerHTML = '';
   modalContent.appendChild(form);
-};
-
-function closeModal() {
-  const modal = document.querySelector(".modal");
-  modal.style.display = "none";
 };
 
 
