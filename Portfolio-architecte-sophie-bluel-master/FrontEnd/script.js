@@ -192,7 +192,7 @@ document.querySelector(".modal-content").appendChild(buttonadd);
     <div class="photo">
     <img src="./assets/icons/Vector.png" alt="" class="img-form">
     <button class="ajout-photo"> + Ajouter photo
-    <input type="file" id="projectImage" name="projectImage" accept="image/*" required>
+    <input type="file" id="image" name="image" accept="image/*" required>
     </button>
     <p class="format">jpg.png : 4mo max </p>
     </div>
@@ -217,13 +217,12 @@ document.querySelector(".modal-content").appendChild(buttonadd);
     e.preventDefault();
 
     const title = document.querySelector('.projectTitle').value;
-    const image = document.querySelector('.img-form').imageUrl;
     const categories = document.querySelector('.selectCategories').value;
     
     const formData = new FormData(form);
     formData.append('title', title);
-    formData.append('categoryId', categories);
-    formData.append('imageUrl', image);
+    formData.append('category', categories);
+    
 
     const options = {
       method: 'POST',
