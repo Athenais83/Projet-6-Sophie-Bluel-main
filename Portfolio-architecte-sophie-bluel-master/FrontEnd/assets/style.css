@@ -52,6 +52,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color:#FFFEF8;
 }
 header {
 	display: flex;
@@ -213,7 +214,12 @@ footer nav ul {
     color: white;
     padding: 10px;
     margin-bottom: 10px;
-	text-align: center;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center;
+	img{
+		margin-right: 10px;
+	}
 }
 
 .btn-modifier{

@@ -25,7 +25,7 @@ function loginUser(email, password) {
       if (response.ok) {
           return response.json();
       } else {
-          throw new Error('Email ou mot de passe incorrect.');
+          alert ('Email ou mot de passe incorrect.');
       }
   })
   .then(data => {

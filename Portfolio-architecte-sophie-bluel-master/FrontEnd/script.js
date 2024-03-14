@@ -57,7 +57,7 @@ function displayEditMode() {
   const editModeDiv = document.createElement("div");
   editModeDiv.innerHTML = `
  <p>Mode édition</p>
- <img src="./assets/icons/modifier.png">`;
+ <img src="./assets/icons/edition.png">`;
   editModeDiv.classList.add("bandeau-edition")
   
   header.parentNode.insertBefore(editModeDiv, header);
