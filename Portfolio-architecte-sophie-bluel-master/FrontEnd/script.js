@@ -177,6 +177,19 @@ document.querySelector(".modal-content").appendChild(buttonadd);
 } 
  };
 
+ function openPreviousModal() {
+  // Récupérer toutes les modales affichées
+  const modals = document.querySelectorAll('.modal-content');
+  
+  // Vérifier si au moins deux modales sont ouvertes
+  if (modals.length > 1) {
+    // Masquer la modal actuelle
+    modals[modals.length - 1].style.display = 'none';
+    // Afficher la modal précédente
+    modals[modals.length - 2].style.display = 'block';
+  }
+};
+
  async function modalProjet() {
   console.log("fonction modalProjet est appelée");
 
@@ -185,15 +198,27 @@ document.querySelector(".modal-content").appendChild(buttonadd);
   const response = await fetch("http://localhost:5678/api/categories");
   const categories = await response.json();
 
+  const arrow = document.createElement("button");
+  arrow.innerHTML = "./assets/icons/arrow-left.png ";
+  arrow.classList.add("arrow-left");
+  arrow.addEventListener('click', function(){
+    openPreviousModal();
+  })
+
   const form = document.createElement("form");
   form.classList.add("form-add-projet")
   form.innerHTML = `
+    <div class="icon">
+    <input type="image" class="arrow-left" alt="précédents" src="./assets/icons/arrow-left.png" />
+    <input type = "image" class="close-btn" alt="fermer" src="./assets/icons/close.png" />
+    </div>
     <p class="title-modal-project">Ajout photo</p>
     <div class="photo">
     <img src="./assets/icons/Vector.png" alt="" class="img-form">
-    <button class="ajout-photo"> + Ajouter photo
-    <input type="file" id="image" name="image" accept="image/*" required>
-    </button>
+    <div class="custom-file-upload">
+    <label for="image" class="ajout-photo">+ Ajouter photo</label>
+    <input type="file" id="image" class="ajout" name="image" accept="image/*" required>
+    </div>
     <p class="format">jpg.png : 4mo max </p>
     </div>
     <libelle class="libelle">Titre</libelle>
@@ -212,6 +237,10 @@ document.querySelector(".modal-content").appendChild(buttonadd);
     selectCategories.appendChild(option);
   });
 
+  const closeButton = form.querySelector('.close-btn');
+  closeButton.addEventListener('click', function() {
+    closeModal();
+  });
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -247,6 +276,12 @@ document.querySelector(".modal-content").appendChild(buttonadd);
 
   modalContent.innerHTML = '';
   modalContent.appendChild(form);
+
 };
+
+function closeModal(){
+  const modal = document.querySelector('.modal');
+  modal.style.display = 'none';
+}
 
 

@@ -247,11 +247,14 @@ footer nav ul {
   }
   
   .close {
-    width: 5%;
-	height: 4%;
+	width: 5%;
+    height: 4%;
     background-color: white;
     float: right;
-	border: none;
+    border: none;
+    padding-top: 5px;
+    font-size: 20px;
+    padding-left: 0px;
 	i{
 		color: black;
 	}
@@ -341,15 +344,21 @@ footer nav ul {
 	padding-bottom: 15px;
 }
 
-.ajout-photo{
-	z-index: 0;
-	border-radius: 20px;
-	align-self: center;
-	font-size: 20px;
-	display: flex;
-	flex-direction: column;
-	width: 40%;
-	line-height: 10px;
+.custom-file-upload input[type="file"] {
+    display: none; 
+}
+
+.custom-file-upload .ajout-photo {
+    display: inline-block;
+    padding: 8px 30px;
+    background-color: #CBD6DC;
+    color: #306685;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.custom-file-upload .ajout-photo:hover {
+    background-color: #CBD6DC;
 }
 
 .format{
@@ -368,6 +377,7 @@ footer nav ul {
 	background-color: #A7A7A7;
 	color: white;
 	line-height: 25px;
+	margin-top: 15px;
 }
 
 .selectCategories{
@@ -381,4 +391,24 @@ footer nav ul {
 .libelle{
 	width: 70%;
 	padding-top: 15px;
+}
+
+.arrow-left{
+	display: flex;
+    align-self: flex-start;
+    margin-left: 10px;
+    padding-top: 10px;
+}
+
+.close-btn{
+	display: flex;
+    align-self: end;
+    margin-right: 10px;
+}
+
+.icon{
+	display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-self: normal;
 }
