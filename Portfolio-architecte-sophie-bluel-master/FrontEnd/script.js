@@ -55,17 +55,20 @@ function displayEditMode() {
   const header = document.querySelector("header");
   
   const editModeDiv = document.createElement("div");
-  editModeDiv.innerHTML = "Mode édition";
+  editModeDiv.innerHTML = `
+ <p>Mode édition</p>
+ <img src="./assets/icons/modifier.png">`;
   editModeDiv.classList.add("bandeau-edition")
   
   header.parentNode.insertBefore(editModeDiv, header);
 
   const buttonEdit = document.createElement("button");
-  buttonEdit.innerHTML = "Modifier";
+  buttonEdit.innerHTML = `
+  <p>modifier</p>
+  <img src="./assets/icons/modifier.png">`;
   buttonEdit.classList.add("btn-modifier")
-  buttonFilter.style.display = "";
 
-  buttonFilter.parentNode.insertBefore(buttonEdit, buttonFilter);
+  titre.parentNode.insertBefore(buttonEdit, titre);
 
   buttonEdit.addEventListener("click", function(e) {
     console.log("modale créer")
@@ -177,19 +180,6 @@ document.querySelector(".modal-content").appendChild(buttonadd);
 } 
  };
 
- function openPreviousModal() {
-  // Récupérer toutes les modales affichées
-  const modals = document.querySelectorAll('.modal-content');
-  
-  // Vérifier si au moins deux modales sont ouvertes
-  if (modals.length > 1) {
-    // Masquer la modal actuelle
-    modals[modals.length - 1].style.display = 'none';
-    // Afficher la modal précédente
-    modals[modals.length - 2].style.display = 'block';
-  }
-};
-
  async function modalProjet() {
   console.log("fonction modalProjet est appelée");
 
@@ -202,7 +192,7 @@ document.querySelector(".modal-content").appendChild(buttonadd);
   arrow.innerHTML = "./assets/icons/arrow-left.png ";
   arrow.classList.add("arrow-left");
   arrow.addEventListener('click', function(){
-    openPreviousModal();
+    return createModal();
   })
 
   const form = document.createElement("form");
@@ -220,6 +210,7 @@ document.querySelector(".modal-content").appendChild(buttonadd);
     <input type="file" id="image" class="ajout" name="image" accept="image/*" required>
     </div>
     <p class="format">jpg.png : 4mo max </p>
+    <img id="image-preview" src="#" alt="Aperçu de votre image" style="display: none; max-width: 100px; max-height: 150px;">
     </div>
     <libelle class="libelle">Titre</libelle>
     <input type="text" class="projectTitle" name="projectTitle" required>
@@ -240,6 +231,31 @@ document.querySelector(".modal-content").appendChild(buttonadd);
   const closeButton = form.querySelector('.close-btn');
   closeButton.addEventListener('click', function() {
     closeModal();
+  });
+
+  const imageInput = form.querySelector('#image');
+  const imagePreview = form.querySelector('#image-preview');
+  imageInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+       
+        form.querySelector('.img-form').style.display = 'none';
+        form.querySelector('.custom-file-upload').style.display = 'none';
+        form.querySelector('.format').style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      imagePreview.src = '#';
+      imagePreview.style.display = 'none';
+      
+      form.querySelector('.img-form').style.display = 'block';
+      form.querySelector('.custom-file-upload').style.display = 'block';
+      form.querySelector('.format').style.display = 'block';
+    }
   });
 
   form.addEventListener("submit", function (e) {

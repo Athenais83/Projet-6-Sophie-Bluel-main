@@ -218,6 +218,14 @@ footer nav ul {
 
 .btn-modifier{
 	color: black;
+	display: flex;
+    flex-direction: row-reverse;
+    border: none;
+    background-color: transparent;
+	float: right;
+	img{
+		margin-right: 10px;
+	}
 }
 
 .modal {
@@ -378,6 +386,7 @@ footer nav ul {
 	color: white;
 	line-height: 25px;
 	margin-top: 15px;
+	border: none;
 }
 
 .selectCategories{
