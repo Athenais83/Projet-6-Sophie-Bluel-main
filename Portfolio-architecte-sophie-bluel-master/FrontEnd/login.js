@@ -33,7 +33,6 @@ function loginUser(email, password) {
     localStorage.setItem('token', token); 
     localStorage.getItem('editModeEnabled', true); 
     window.location.href="./index.html";
-    displayEditMode();
 })
 .catch(error => {
     console.error('Erreur lors de la connexion :', error);

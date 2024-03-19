@@ -60,7 +60,7 @@ function displayEditMode() {
  <img src="./assets/icons/edition.png">`;
   editModeDiv.classList.add("bandeau-edition")
   
-  header.parentNode.insertBefore(editModeDiv, header);
+  header.appendChild(editModeDiv);
 
   const buttonEdit = document.createElement("button");
   buttonEdit.innerHTML = `
@@ -68,13 +68,12 @@ function displayEditMode() {
   <img src="./assets/icons/modifier.png">`;
   buttonEdit.classList.add("btn-modifier")
 
-  titre.parentNode.insertBefore(buttonEdit, titre);
+  titre.appendChild(buttonEdit);
 
   buttonEdit.addEventListener("click", function(e) {
     console.log("modale créer")
       e.preventDefault();
       createModal();
-      addProject();
   });
 }
 
@@ -154,6 +153,8 @@ function createModal(){
       modal.style.display = "none";
     }
   }
+
+  addProject();
 };
 
 function addProject(){
@@ -193,19 +194,12 @@ function addProject(){
 
   const response = await fetch("http://localhost:5678/api/categories");
   const categories = await response.json();
-
-  const arrow = document.createElement("button");
-  arrow.innerHTML = "./assets/icons/arrow-left.png ";
-  arrow.classList.add("arrow-left");
-  arrow.addEventListener('click', function(){
-    createModal();
-  })
     
   const form = document.createElement("form");
   form.classList.add("form-add-projet")
   form.innerHTML = `
     <div class="icon">
-    <input type="image" class="arrow-left" alt="précédents" src="./assets/icons/arrow-left.png" />
+    <img class="arrow-left" alt="précédents" src="./assets/icons/arrow-left.png" onclick="createModal()" />
     <input type = "image" class="close-btn" alt="fermer" src="./assets/icons/close.png" />
     </div>
     <p class="title-modal-project">Ajout photo</p>

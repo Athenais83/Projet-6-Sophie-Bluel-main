@@ -125,6 +125,8 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	display: flex;
+    justify-content: center;
 }
 
 .buttonFilter{
@@ -228,7 +230,6 @@ footer nav ul {
     flex-direction: row-reverse;
     border: none;
     background-color: transparent;
-	float: right;
 	img{
 		margin-right: 10px;
 	}
