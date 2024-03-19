@@ -158,20 +158,26 @@ function createModal(){
 
 function addProject(){
   console.log("cette fonction est appeler");
-    const buttonadd = document.createElement("div")
-    buttonadd.classList.add("div-button-add")
-    
-document.querySelector(".modal-content").appendChild(buttonadd);
+  const buttonadd = document.createElement("div");
+  buttonadd.classList.add("div-button-add");
+  const btnAdd = document.createElement("button");
+  btnAdd.classList.add("btn-add");
+  btnAdd.innerHTML ="Ajouter une photo";
 
-    const btnAdd = document.createElement("button")
-    btnAdd.classList.add("btn-add")
-    btnAdd.innerHTML ="Ajouter une photo"
-    buttonadd.appendChild(btnAdd)
+  const lineImage = document.createElement("img");
+  lineImage.src = "./assets/icons/Line.png"; 
+  lineImage.classList.add("line-image");
 
-    btnAdd.addEventListener("click", function(e){
-    e.preventDefault();
-    modalProjet();
+  buttonadd.appendChild(lineImage);
+  buttonadd.appendChild(btnAdd);
+  
+  document.querySelector(".modal-content").appendChild(buttonadd);
+
+  btnAdd.addEventListener("click", function(e){
+      e.preventDefault();
+      modalProjet();
   });
+
 }
   window.onload = function() {
   const editModeEnabled = localStorage.getItem('token');
@@ -194,7 +200,7 @@ document.querySelector(".modal-content").appendChild(buttonadd);
   arrow.addEventListener('click', function(){
     createModal();
   })
-
+    
   const form = document.createElement("form");
   form.classList.add("form-add-projet")
   form.innerHTML = `
@@ -289,6 +295,13 @@ document.querySelector(".modal-content").appendChild(buttonadd);
         console.error('Erreur lors de la connexion :', error);
       });
   });
+
+  const lineImage = document.createElement("img");
+    lineImage.src = "./assets/icons/Line.png"; 
+    lineImage.classList.add("line"); 
+
+    const btnValider = form.querySelector('.btn-valider');
+    btnValider.parentNode.insertBefore(lineImage, btnValider);
 
   modalContent.innerHTML = '';
   modalContent.appendChild(form);

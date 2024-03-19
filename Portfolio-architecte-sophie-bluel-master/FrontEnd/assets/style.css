@@ -317,7 +317,16 @@ footer nav ul {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 }
+
+.line-image{
+	width: 50%;
+	height: 2%;
+	padding-bottom: 30px;
+	align-self: center;
+}
+
   .btn-add{
 	background-color: #1D6154;
 	color: white;
@@ -326,6 +335,8 @@ footer nav ul {
 	height: 30px;
 	padding-left: 25px;
 	padding-right: 25px;
+	width: 40%;
+    align-self: center;
   }
 
 .form-add-projet{
@@ -393,6 +404,12 @@ footer nav ul {
 	line-height: 25px;
 	margin-top: 15px;
 	border: none;
+}
+
+.line{
+	padding-top: 20px;
+	height: 2px;
+    width: 70%;
 }
 
 .selectCategories{
