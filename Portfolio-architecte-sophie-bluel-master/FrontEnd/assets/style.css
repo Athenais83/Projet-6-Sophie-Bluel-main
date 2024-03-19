@@ -57,8 +57,16 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	flex-direction: column-reverse;
 }
+
+.header-link{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
 section {
 	margin: 50px 0
 }
@@ -219,6 +227,7 @@ footer nav ul {
 	display: flex;
 	flex-direction: row-reverse;
 	justify-content: center;
+	width: 100%;
 	img{
 		margin-right: 10px;
 	}
@@ -230,6 +239,7 @@ footer nav ul {
     flex-direction: row-reverse;
     border: none;
     background-color: transparent;
+	margin-left: 15px;
 	img{
 		margin-right: 10px;
 	}
