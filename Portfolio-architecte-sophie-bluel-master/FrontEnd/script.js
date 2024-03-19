@@ -192,7 +192,7 @@ document.querySelector(".modal-content").appendChild(buttonadd);
   arrow.innerHTML = "./assets/icons/arrow-left.png ";
   arrow.classList.add("arrow-left");
   arrow.addEventListener('click', function(){
-    return createModal();
+    createModal();
   })
 
   const form = document.createElement("form");
