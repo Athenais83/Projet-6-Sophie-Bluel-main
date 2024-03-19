@@ -33,8 +33,17 @@ function loginUser(email, password) {
     localStorage.setItem('token', token); 
     localStorage.getItem('editModeEnabled', true); 
     window.location.href="./index.html";
+
+    const loginLink = document.getElementById("loginLink");
+    loginLink.innerHTML = "logout";
+    loginLink.addEventListener("click", function(){
+        localStorage.removeItem('token');
+        loginLink.innerHTML = "login";
+        window.location.href="./index.html";
+    });
+    
 })
 .catch(error => {
     console.error('Erreur lors de la connexion :', error);
 });
-}
+};

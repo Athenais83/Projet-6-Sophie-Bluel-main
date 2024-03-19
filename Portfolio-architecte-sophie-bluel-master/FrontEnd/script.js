@@ -37,13 +37,22 @@ function displaycategories(){
     button.innerHTML="Tous";
     buttonFilter.appendChild(button); 
     button.addEventListener("click", function(){
+      document.querySelectorAll('.buttonFilter button').forEach(btn =>{
+        btn.classList.remove('selected');
+      });
+      button.classList.add('selected');
       displayWorks(works);
     })
+
   categories.forEach((category) => {
     const button= document.createElement("button");
     button.innerHTML= category.name;
     buttonFilter.appendChild(button); 
     button.addEventListener("click", function(){
+      document.querySelectorAll('.buttonFilter button').forEach(btn =>{
+        btn.classList.remove('selected');
+      });
+      button.classList.add('selected');
       let objetsWork= works.filter((work)=> work.categoryId === category.id);
       displayWorks(objetsWork);
     })
