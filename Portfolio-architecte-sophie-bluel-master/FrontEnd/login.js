@@ -1,9 +1,9 @@
   const buttonSubmit = document.getElementById("submit")
   buttonSubmit.addEventListener("click", function(e){
   e.preventDefault();
-  const email = document.getElementById("email").value
-  const password = document.getElementById("password").value
-  loginUser(email, password)
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  loginUser(email, password);
 });
 
 function loginUser(email, password) {
@@ -32,15 +32,15 @@ function loginUser(email, password) {
     const token = data.token;
     localStorage.setItem('token', token); 
     localStorage.getItem('editModeEnabled', true); 
-    window.location.href="./index.html";
 
-    const loginLink = document.getElementById("loginLink");
-    loginLink.innerHTML = "logout";
-    loginLink.addEventListener("click", function(){
-        localStorage.removeItem('token');
-        loginLink.innerHTML = "login";
-        window.location.href="./index.html";
-    });
+    const loginLink = document.getElementById('loginLink');
+    loginLink.textContent = 'Log out';
+    loginLink.onclick = function() {
+      localStorage.removeItem('token');
+      window.location.href = "./index.html";
+    };
+
+    window.location.href="./index.html";
     
 })
 .catch(error => {
