@@ -1,9 +1,11 @@
-  const buttonSubmit = document.getElementById("submit")
+  document.addEventListener("DOMContentLoaded", function(){
+  const buttonSubmit = document.getElementById("submit");
   buttonSubmit.addEventListener("click", function(e){
   e.preventDefault();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   loginUser(email, password);
+});
 });
 
 function loginUser(email, password) {
