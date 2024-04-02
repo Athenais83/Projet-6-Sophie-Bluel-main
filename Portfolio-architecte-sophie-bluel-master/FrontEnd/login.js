@@ -36,7 +36,7 @@ function loginUser(email, password) {
     localStorage.getItem('editModeEnabled', true); 
 
     const loginLink = document.getElementById('loginLink');
-    loginLink.textContent = 'Log out';
+    loginLink.innerHTML = 'Log out';
     loginLink.onclick = function() {
       localStorage.removeItem('token');
       window.location.href = "./index.html";

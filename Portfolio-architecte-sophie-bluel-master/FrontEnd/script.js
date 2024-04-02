@@ -267,7 +267,7 @@ function addProject(){
     }
   });
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const title = document.querySelector('.projectTitle').value;
@@ -286,17 +286,17 @@ function addProject(){
       }
     };
 
-    fetch('http://localhost:5678/api/works', options)
-      .then(async response => {
-        if (response.ok) {
-          await loadWorks(); 
-        } else {
-          console.error("Erreur lors de l'ajout du projet", response.statusText);
-        }
-      })
-      .catch(error => {
-        console.error('Erreur lors de la connexion :', error);
-      });
+    try {
+      const response = await fetch('http://localhost:5678/api/works', options);
+      if (response.ok) {
+        await loadWorks(); 
+        closeModal(); // Fermer la modal après l'ajout du projet
+      } else {
+        console.error("Erreur lors de l'ajout du projet", response.statusText);
+      }
+  } catch (error) {
+      console.error('Erreur lors de la connexion :', error);
+  }
   });
 
   const lineImage = document.createElement("img");
