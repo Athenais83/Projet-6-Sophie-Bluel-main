@@ -193,6 +193,12 @@ function addProject(){
   const editModeEnabled = localStorage.getItem('token');
   if (editModeEnabled) {
     displayEditMode();
+    const loginLink = document.getElementById('loginLink');
+    loginLink.innerHTML = 'Log out';
+    loginLink.onclick = function() {
+      localStorage.removeItem('token');
+      window.location.href = "./index.html";
+    };
 } 
  };
 
