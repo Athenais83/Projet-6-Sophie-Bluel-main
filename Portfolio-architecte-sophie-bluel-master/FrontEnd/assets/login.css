@@ -120,3 +120,12 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
+#loginLink :visited{
+	color: black;
+	font-weight: bold;
+}
+
+#loginLink :active{
+	font-weight: 700;
+}

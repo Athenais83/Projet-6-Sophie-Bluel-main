@@ -455,3 +455,12 @@ footer nav ul {
     flex-direction: row;
     align-self: normal;
 }
+
+#loginLink :visited{
+	color: black;
+	font-weight: bold;
+}
+
+#loginLink :active{
+	font-weight: 700;
+}
