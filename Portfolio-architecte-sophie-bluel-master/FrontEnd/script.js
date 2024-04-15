@@ -30,9 +30,16 @@ async function loadCategories() {
 }
 loadCategories();
 
-const buttonFilter= document.querySelector(".buttonFilter");
+
 
 function displaycategories(){
+
+  const user = localStorage.getItem('token');
+  const buttonFilter= document.querySelector(".buttonFilter");
+  if (user){
+    return;
+  }
+else{
   const button= document.createElement("button");
     button.innerHTML="Tous";
     buttonFilter.appendChild(button); 
@@ -56,7 +63,7 @@ function displaycategories(){
       let objetsWork= works.filter((work)=> work.categoryId === category.id);
       displayWorks(objetsWork);
     })
-  })
+  })}
 };
 
 function displayEditMode() {

@@ -34,6 +34,7 @@ function loginUser(email, password) {
     const token = data.token;
     localStorage.setItem('token', token); 
     localStorage.getItem('editModeEnabled', true); 
+    
 
     const loginLink = document.getElementById('loginLink');
     loginLink.innerHTML = 'Log out';
