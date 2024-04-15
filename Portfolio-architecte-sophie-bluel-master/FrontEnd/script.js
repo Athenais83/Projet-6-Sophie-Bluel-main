@@ -296,7 +296,7 @@ function addProject(){
       const response = await fetch('http://localhost:5678/api/works', options);
       if (response.ok) {
         await loadWorks(); 
-        closeModal(); // Fermer la modal après l'ajout du projet
+        closeModal(); 
       } else {
         console.error("Erreur lors de l'ajout du projet", response.statusText);
       }
